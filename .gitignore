@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+storage/
+*.log
+.DS_Store
+.pytest_cache/
+.claude/
+*.egg-info/
+.ruff_cache/
+
+# copyrighted sample document (ISO/IEC 27001) - keep local only
+data/sample.pdf

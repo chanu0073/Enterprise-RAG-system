@@ -1,0 +1,64 @@
+name: ekip
+
+services:
+  ollama:
+    image: ollama/ollama:0.12.6
+    restart: unless-stopped
+    volumes:
+      - ollama:/root/.ollama
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+
+  # one-shot: pulls the generation model into the ollama volume
+  ollama-pull:
+    image: ollama/ollama:0.12.6
+    depends_on:
+      ollama:
+        condition: service_healthy
+    environment:
+      OLLAMA_HOST: http://ollama:11434
+    entrypoint: ["ollama", "pull", "${EKIP_LLM_MODEL:-qwen2.5:3b}"]
+    restart: "no"
+
+  backend:
+    build:
+      context: .
+      dockerfile: docker/backend.Dockerfile
+      args:
+        TORCH_INDEX_URL: ${TORCH_INDEX_URL:-https://download.pytorch.org/whl/cpu}
+    restart: unless-stopped
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      EKIP_OLLAMA_URL: http://ollama:11434
+      EKIP_LLM_MODEL: ${EKIP_LLM_MODEL:-qwen2.5:3b}
+      PYTORCH_CUDA_ALLOC_CONF: expandable_segments:True
+    volumes:
+      - ekip_data:/data
+    ports:
+      - "${BACKEND_PORT:-8000}:8000"
+    depends_on:
+      ollama:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: .
+      dockerfile: docker/frontend.Dockerfile
+    restart: unless-stopped
+    environment:
+      EKIP_API_URL: http://backend:8000
+      EKIP_API_KEY: ${EKIP_API_KEY:-}
+    ports:
+      - "${FRONTEND_PORT:-8501}:8501"
+    depends_on:
+      backend:
+        condition: service_healthy
+
+volumes:
+  ollama:
+  ekip_data:

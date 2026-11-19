@@ -1,0 +1,52 @@
+[
+  {
+    "id": "A1",
+    "category": "basic",
+    "question": "What is the purpose of an information security management system?"
+  },
+  {
+    "id": "A2",
+    "category": "basic",
+    "question": "What is information security risk assessment?"
+  },
+  {
+    "id": "A3",
+    "category": "basic",
+    "question": "What are the requirements for leadership and commitment?"
+  },
+  {
+    "id": "B1",
+    "category": "terminology",
+    "question": "What is information security risk treatment?"
+  },
+  {
+    "id": "C1",
+    "category": "abbreviation",
+    "question": "What is ISMS?"
+  },
+  {
+    "id": "D1",
+    "category": "clause",
+    "question": "What does clause 6.1.2 require?"
+  },
+  {
+    "id": "E1",
+    "category": "table",
+    "question": "What is control 5.7?"
+  },
+  {
+    "id": "F1",
+    "category": "multi_chunk",
+    "question": "What steps are involved in information security risk assessment?"
+  },
+  {
+    "id": "G1",
+    "category": "out_of_document",
+    "question": "What is the capital of Japan?"
+  },
+  {
+    "id": "H1",
+    "category": "poor_query",
+    "question": "risk assess?"
+  }
+]

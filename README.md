@@ -79,7 +79,7 @@ LLM LoRA training additionally needs `pip install -r requirements-finetune.txt`.
 4. **Adapt:** fine-tune the embedding model and/or reranker. Each training job automatically evaluates base vs
    fine-tuned on the held-out split and stores the deltas in the model registry. Activate the better model;
    embedding activation re-embeds all collections in the background.
-5. **Optimize:** *Optimization → Run* finds the best retrieval configuration for your data, then *Apply*.
+5. **Optimize (optional, API only):** `POST /optimize` finds the best retrieval configuration for your data, then `POST /optimize/{run_id}/apply`. The UI page is hidden; re-enable it in `frontend/app.py`.
 6. **Operate:** watch latency, feedback and knowledge gaps on *System & Analytics*. 👍 answers flow into the next dataset.
 
 ### How relevance is judged
@@ -116,7 +116,7 @@ Environment variables (prefix `EKIP_`, see `backend/app/core/config.py` and `.en
 `LLM_MODEL`, `OLLAMA_URL`, `HF_BASE_MODEL`, `MAX_UPLOAD_MB`, `QUERY_CACHE_SIZE`, `QUERY_CACHE_TTL_S`.
 
 Retrieval parameters (chunking, mode, fusion, depth, reranking, identifier boost) are runtime settings, edited on the
-Optimization page or via `PUT /config/retrieval`.
+`PUT /config/retrieval` (or the Optimization page, if enabled).
 
 ## Project layout
 

@@ -14,7 +14,7 @@ pages = {
     "Improve": [
         st.Page("views/finetune.py", title="Datasets & Fine-tuning", icon="🧪"),
         st.Page("views/evaluation.py", title="Evaluation", icon="📊"),
-        st.Page("views/optimization.py", title="Optimization", icon="⚙️"),
+        # st.Page("views/optimization.py", title="Optimization", icon="⚙️"),  # hidden; API /optimize still works
     ],
     "Operate": [st.Page("views/system.py", title="System & Analytics", icon="🖥️")],
 }
